@@ -171,7 +171,7 @@ public class RepoActivity extends BaseActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("https://github.com/filippella/Dagger-Rx-Database-MVP"));
+                        intent.setData(Uri.parse("https://github.com/rajeeshadam/GitHubRepoConnect"));
                         startActivity(intent);
                         dialog.dismiss();
                     }

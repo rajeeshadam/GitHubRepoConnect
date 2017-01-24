@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rajeesh.githubrepo.R;
@@ -70,13 +73,34 @@ public class RepoActivity extends BaseActivity
         return R.layout.activity_main;
     }
     private void loadRepo() {
-        if (NetworkUtils.isNetAvailable(this)) {
-            mPresenter.getRepos();
-        } else {
-            // mPresenter.getCakesFromDatabase();
-        }
+        loadRepofromPresernter();
+
     }
 
+    private void loadRepofromPresernter(){
+
+        if (NetworkUtils.isNetAvailable(getApplicationContext())) {
+            mPresenter.getRepos();
+        } else {
+            Snackbar snackbar = Snackbar
+                    .make(this.drawer, "No internet connection!", Snackbar.LENGTH_LONG)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            loadRepofromPresernter();
+                        }
+                    });
+            snackbar.setActionTextColor(Color.RED);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.YELLOW);
+
+            snackbar.show();
+
+
+        }
+
+    }
     private void initializeList() {
 
 
@@ -229,14 +253,38 @@ public class RepoActivity extends BaseActivity
         mRepoAdapter.clearRepo();
     }
 
+    private void loadDetails(final String reponame){
+        if (NetworkUtils.isNetAvailable(getApplicationContext())) {
+            Log.e("urlcheck",GithubApp.API_URL+ GlobalConstants.REPO_DETAIL_URL);
+            Intent intent = new Intent(RepoActivity.this, DetailActivity.class);
+            intent.putExtra("REPO_NAME",reponame);
+            startActivity(intent);
+        } else {
+            Snackbar snackbar = Snackbar
+                    .make(getWindow().getCurrentFocus(), "No internet connection!", Snackbar.LENGTH_LONG)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            loadDetails(reponame);
+                        }
+                    });
+            snackbar.setActionTextColor(Color.RED);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.YELLOW);
+
+            snackbar.show();
+
+
+        }
+    }
     private GitRepoAdapter.OnRepoClickListener mReopClickListener = new GitRepoAdapter.OnRepoClickListener() {
         @Override
         public void onClick(View v, Repo repo, String name, int position) {
             GlobalConstants.REPO_DETAIL_URL= "/repos/" +getUsername() +"/" + name + "/commits/master";
-            Log.e("urlcheck",GithubApp.API_URL+ GlobalConstants.REPO_DETAIL_URL);
-            Intent intent = new Intent(RepoActivity.this, DetailActivity.class);
-            intent.putExtra("REPO_NAME",name);
-            startActivity(intent);
+            loadDetails(name);
+
+
         }
 
 

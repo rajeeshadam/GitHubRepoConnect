@@ -1,5 +1,5 @@
 
-package com.rajeesh.githubrepo.modules.home.adapter;
+package com.rajeesh.githubrepo.modules.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

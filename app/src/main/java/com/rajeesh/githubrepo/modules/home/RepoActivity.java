@@ -27,7 +27,7 @@ import com.rajeesh.githubrepo.di.module.RepoModule;
 import com.rajeesh.githubrepo.githubfile.GithubApp;
 import com.rajeesh.githubrepo.githubfile.GithubSession;
 import com.rajeesh.githubrepo.modules.details.DetailActivity;
-import com.rajeesh.githubrepo.modules.home.adapter.GitRepoAdapter;
+import com.rajeesh.githubrepo.modules.adapter.GitRepoAdapter;
 import com.rajeesh.githubrepo.mvp.model.Repo;
 import com.rajeesh.githubrepo.mvp.model.RepoDetails;
 import com.rajeesh.githubrepo.mvp.presenter.RepoPresenter;

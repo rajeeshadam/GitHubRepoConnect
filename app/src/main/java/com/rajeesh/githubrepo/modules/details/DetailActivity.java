@@ -16,17 +16,11 @@
 
 package com.rajeesh.githubrepo.modules.details;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,16 +28,11 @@ import com.rajeesh.githubrepo.R;
 import com.rajeesh.githubrepo.base.BaseActivity;
 import com.rajeesh.githubrepo.di.components.DaggerRepoComponent;
 import com.rajeesh.githubrepo.di.module.RepoModule;
-import com.rajeesh.githubrepo.githubfile.GithubApp;
-import com.rajeesh.githubrepo.githubfile.GithubSession;
-import com.rajeesh.githubrepo.modules.home.RepoActivity;
-import com.rajeesh.githubrepo.modules.home.adapter.GitRepoAdapter;
-import com.rajeesh.githubrepo.modules.home.adapter.GitRepoDetailAdapter;
-import com.rajeesh.githubrepo.mvp.model.CommitDetails;
+import com.rajeesh.githubrepo.modules.adapter.GitRepoAdapter;
+import com.rajeesh.githubrepo.modules.adapter.GitRepoDetailAdapter;
 import com.rajeesh.githubrepo.mvp.model.Repo;
 import com.rajeesh.githubrepo.mvp.model.RepoDetails;
 import com.rajeesh.githubrepo.mvp.presenter.RepoDetailsPresenter;
-import com.rajeesh.githubrepo.mvp.presenter.RepoPresenter;
 import com.rajeesh.githubrepo.mvp.view.MainView;
 import com.rajeesh.githubrepo.utilities.NetworkUtils;
 
